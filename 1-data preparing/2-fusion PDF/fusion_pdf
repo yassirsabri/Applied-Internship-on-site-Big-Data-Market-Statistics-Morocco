@@ -1,1 +1,41 @@
 
+import os
+from PyPDF2 import PdfMerger
+import time
+
+# 🕒 Début du chronométrage
+start_time = time.time()
+
+# 🔁 Dossier contenant les 229 fichiers PDF
+dossier_pdfs = "C:/Users/lenovo/Downloads/stageapplication2/pdfs"  # <-- À modifier
+
+# 📦 Création d’un objet de fusion
+fusionneur = PdfMerger()
+
+# 📄 Liste triée des fichiers PDF dans le dossier
+fichiers = sorted(
+    [f for f in os.listdir(dossier_pdfs) if f.lower().endswith(".pdf")]
+)
+
+print(f"📂 {len(fichiers)} fichiers PDF trouvés. Fusion en cours...")
+
+# 🔗 Ajout de chaque fichier à la fusion
+for i, fichier in enumerate(fichiers, 1):
+    chemin_complet = os.path.join(dossier_pdfs, fichier)
+    try:
+        fusionneur.append(chemin_complet)
+        print(f"✅ [{i}/{len(fichiers)}] Ajouté : {fichier}")
+    except Exception as e:
+        print(f"⚠️ Erreur avec {fichier} : {e}")
+
+# 💾 Export du fichier final fusionné
+fichier_sortie = os.path.join(dossier_pdfs, "PDF_fusionne_total2.pdf")
+fusionneur.write(fichier_sortie)
+fusionneur.close()
+
+# ⏱️ Fin du chronométrage
+end_time = time.time()
+elapsed = end_time - start_time
+
+print(f"\n✅ Fusion terminée. Fichier enregistré ici : {fichier_sortie}")
+print(f"⏱️ Temps total : {elapsed:.2f} secondes")
