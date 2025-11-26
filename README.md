@@ -56,7 +56,7 @@ Collect, structure, and analyze public procurement data published between 2021 a
 ---
 
 ## 📁 Deliverables
-- Cleaned public markets database (2021–2025)  
+- Cleaned public markets database 
 - Analytical report with figures and insights  
 - Interactive dashboard  
 - Documented source code  
